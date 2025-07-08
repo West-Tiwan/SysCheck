@@ -2,19 +2,24 @@ package com.example.syscheck
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.syscheck.ui.theme.SysCheckTheme
+import androidx.core.net.toUri
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +40,43 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    Button(
-        onClick = {
-            val intent = Intent(context, AboutActivity::class.java)
-            context.startActivity(intent)
-        },
-        modifier = Modifier.padding(40.dp)
+    Column (
+        modifier = Modifier.padding(40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "go to about page")
+        Button(
+            onClick = {
+                val intent = Intent(context, AboutActivity::class.java)
+                context.startActivity(intent)
+            }
+        ) {
+            Text(text = "go to about page")
+        }
+        Button(
+            onClick = {
+                val number = 1234567890
+                val intent = Intent(
+                    Intent.ACTION_DIAL
+                ).apply {
+                    data = "tel:$number".toUri()
+                }
+                try {
+                    context.startActivity(intent)
+                } catch (e: Error) {
+                    Toast.makeText(context, "can't find dialer", Toast.LENGTH_SHORT).show()
+                }
+            }
+        ) {
+            Text(text = "open dialer")
+        }
+        Button(
+            onClick = {
+                val intent = Intent(context, CameraActivity::class.java)
+                context.startActivity(intent)
+            }
+        ) {
+            Text(text = "open camera")
+        }
     }
 }
