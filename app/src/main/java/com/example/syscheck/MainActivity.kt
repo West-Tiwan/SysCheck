@@ -55,6 +55,22 @@ fun Greeting(modifier: Modifier = Modifier) {
         }
         Button(
             onClick = {
+                val intent = Intent(context, LoggingService::class.java)
+                context.startService(intent)
+            }
+        ) {
+            Text(text = "start logging service")
+        }
+        Button(
+            onClick = {
+                val intent = Intent(context, LoggingService::class.java)
+                context.stopService(intent)
+            }
+        ) {
+            Text(text = "stop logging service")
+        }
+        Button(
+            onClick = {
                 val number = 1234567890
                 val intent = Intent(
                     Intent.ACTION_DIAL
