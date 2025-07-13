@@ -1,6 +1,10 @@
 package com.example.syscheck
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -18,6 +22,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.syscheck.ui.theme.SysCheckTheme
 import androidx.core.net.toUri
 
@@ -40,6 +46,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1001)
+        }
+    }
     Column (
         modifier = Modifier.padding(40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,6 +97,14 @@ fun Greeting(modifier: Modifier = Modifier) {
             }
         ) {
             Text(text = "open dialer")
+        }
+        Button(
+            onClick = {
+                val intent = Intent(context, ForegroundLogging::class.java)
+                ContextCompat.startForegroundService(context, intent)
+            }
+        ) {
+            Text(text = "start foreground service")
         }
         Button(
             onClick = {
