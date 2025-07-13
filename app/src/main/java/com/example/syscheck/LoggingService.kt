@@ -12,9 +12,13 @@ class LoggingService: Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         thread = Thread {
-            while (running) {
-                Log.d("LoggingService", "Service is running")
-                sleep(1000)
+            try {
+                while (running) {
+                    Log.d("LoggingService", "Service is running...")
+                    sleep(1000)
+                }
+            } catch (e: InterruptedException) {
+                Log.d("LoggingService", "Service thread interrupted.")
             }
         }
         thread.start()
@@ -23,11 +27,7 @@ class LoggingService: Service() {
 
     override fun onDestroy() {
         running = false
-        try {
-            thread.interrupt()
-        } catch (e: Exception) {
-            Log.d("LoggingService", "logging service stopped error - $e")
-        }
+        thread.interrupt()
         super.onDestroy()
     }
 
