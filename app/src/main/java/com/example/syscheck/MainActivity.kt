@@ -26,6 +26,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.syscheck.ui.theme.SysCheckTheme
 import androidx.core.net.toUri
+import com.example.syscheck.ui.screen.AboutActivity
+import com.example.syscheck.ui.screen.CameraActivity
+import com.example.syscheck.ui.screen.ForegroundLogging
+import com.example.syscheck.ui.screen.LoggingService
+import com.example.syscheck.ui.screen.TaskListActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +118,14 @@ fun Greeting(modifier: Modifier = Modifier) {
             }
         ) {
             Text(text = "open camera")
+        }
+        Button(
+            onClick = {
+                val intent = Intent(context, TaskListActivity::class.java)
+                context.startActivity(intent)
+            }
+        ) {
+            Text(text = "open Task List Screen")
         }
     }
 }

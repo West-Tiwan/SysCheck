@@ -1,4 +1,4 @@
-package com.example.syscheck
+package com.example.syscheck.ui.screen
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.example.syscheck.R
 
 class ForegroundLogging: Service() {
     override fun onCreate() {

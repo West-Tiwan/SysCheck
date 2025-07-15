@@ -1,4 +1,4 @@
-package com.example.syscheck
+package com.example.syscheck.ui.screen
 
 import android.Manifest
 import android.content.Context
@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import coil3.compose.AsyncImage
+import com.example.syscheck.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date

@@ -33,7 +33,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <receiver android:name=".AirplaneModeReceiver" android:exported="false">
+        <receiver android:name=".ui.screen.AirplaneModeReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.AIRPLANE_MODE" />
             </intent-filter>
@@ -48,10 +48,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".CameraActivity" />
-        <service android:name=".LoggingService" />
-        <service android:name=".ForegroundLogging" android:foregroundServiceType="mediaPlayback" android:exported="false"/>
+        <activity android:name=".ui.screen.AboutActivity" />
+        <activity android:name=".ui.screen.CameraActivity" />
+        <service android:name=".ui.screen.LoggingService" />
+        <activity android:name=".ui.screen.TaskListActivity" />
+        <service android:name=".ui.screen.ForegroundLogging" android:foregroundServiceType="mediaPlayback" android:exported="false"/>
     </application>
 
 </manifest>

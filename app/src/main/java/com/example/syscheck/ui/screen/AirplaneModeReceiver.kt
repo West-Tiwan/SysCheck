@@ -1,4 +1,4 @@
-package com.example.syscheck
+package com.example.syscheck.ui.screen
 
 import android.content.BroadcastReceiver
 import android.content.Context
