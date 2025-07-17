@@ -12,12 +12,21 @@ abstract class TaskDatabase: RoomDatabase() {
     abstract fun taskDao(): TaskDAO
 
     object DatabaseProvider {
+        @Volatile
+        private var INSTANCE: TaskDatabase? = null
+        
         fun provideDatabase(context: Context): TaskDatabase {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                TaskDatabase::class.java,
-                "task_database"
-            ).build()
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    TaskDatabase::class.java,
+                    "task_database"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                instance
+            }
         }
     }
 }
