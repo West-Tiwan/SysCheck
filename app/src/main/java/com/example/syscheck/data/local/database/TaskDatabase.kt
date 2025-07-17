@@ -22,7 +22,7 @@ abstract class TaskDatabase: RoomDatabase() {
                     TaskDatabase::class.java,
                     "task_database"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration(true)
                     .build()
                 INSTANCE = instance
                 instance

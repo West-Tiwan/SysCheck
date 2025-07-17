@@ -26,8 +26,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.syscheck.SysCheckApplication
 import com.example.syscheck.data.local.entity.TaskEntity
 import com.example.syscheck.ui.viewmodel.AndroidTaskViewModel
-import com.example.syscheck.ui.viewmodel.TaskViewModel
-import com.example.syscheck.ui.viewmodel.TaskViewModelFactory
 
 class TaskListActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,62 +42,6 @@ class TaskListActivity: ComponentActivity() {
 
 @Composable
 fun TaskListWithAndroidViewModel(viewModel: AndroidTaskViewModel) {
-    val tasks by viewModel.tasks.observeAsState(emptyList())
-    
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-
-    Column(
-        modifier = Modifier.padding(16.dp)
-    ) {
-        OutlinedTextField(
-            value = title,
-            onValueChange = { title = it },
-            label = { Text("Task Title") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Task Description") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-        )
-        
-        Button(
-            onClick = {
-                if (title.isNotBlank()) {
-                    val newTask = TaskEntity(
-                        id = 0,
-                        title = title,
-                        desc = description
-                    )
-                    viewModel.insertTask(newTask)
-                    title = ""
-                    description = ""
-                }
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        ) {
-            Text("Add Task")
-        }
-        
-        LazyColumn(
-            modifier = Modifier.padding(top = 16.dp)
-        ) {
-            items(tasks) { task ->
-                TaskItem(task = task)
-            }
-        }
-    }
-}
-
-@Composable
-fun TaskList(viewModel: TaskViewModel) {
     val tasks by viewModel.tasks.observeAsState(emptyList())
     
     var title by remember { mutableStateOf("") }
