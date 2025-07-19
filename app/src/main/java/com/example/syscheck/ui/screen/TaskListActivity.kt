@@ -32,7 +32,6 @@ class TaskListActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                // Use AndroidTaskViewModel which can be instantiated automatically
                 val taskViewModel: AndroidTaskViewModel = viewModel()
                 TaskListWithAndroidViewModel(taskViewModel)
             }
